@@ -1,0 +1,10 @@
+<use name=FWCore/Framework>
+<use name=DataFormats/DTDigi>
+<use name=DataFormats/DetId>
+<use name=boost>
+
+<bin name=testDTDigis file=testRunner.cpp,testDTDigis.cc>
+  <use name=cppunit>
+  <use name=DataFormats/FEDRawData>
+</bin>
+

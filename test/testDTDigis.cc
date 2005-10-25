@@ -3,13 +3,13 @@
    Test suit for DTDigis
 
    \author Stefano ARGIRO
-   \version $Id: testDTDigis.cc,v 1.3 2005/08/23 09:10:45 argiro Exp $
+   \version $Id: testDTDigis.cc,v 1.1 2005/10/07 17:40:53 namapane Exp $
    \date 29 Jun 2005
 
    \note This test is not exaustive     
 */
 
-static const char CVSId[] = "$Id: testDTDigis.cc,v 1.3 2005/08/23 09:10:45 argiro Exp $";
+static const char CVSId[] = "$Id: testDTDigis.cc,v 1.1 2005/10/07 17:40:53 namapane Exp $";
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <DataFormats/DTDigi/interface/DTDigi.h>
@@ -49,7 +49,7 @@ void testDTDigis::testDigiPacking(){
 
 void testDTDigis::testDigiCollectionPut(){
 
-  DTDetId layer(2,7,8,1,244);
+  DTDetId layer(2,3,8,1,4);
 
   DTDigiCollection digiCollection;
 
@@ -97,7 +97,7 @@ void testDTDigis::testDigiCollectionInsert(){
   DTDigi digi(pd);
 
 
-  DTDetId layer(2,7,8,1,244);
+  DTDetId layer(2,3,8,1,4);
 
   DTDigiCollection digiCollection;
 

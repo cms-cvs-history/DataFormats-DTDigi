@@ -3,13 +3,11 @@
    Test suit for DTDigis
 
    \author Stefano ARGIRO
-   \version $Id: testDTDigis.cc,v 1.1 2005/10/07 17:40:53 namapane Exp $
+   \version $Id: testDTDigis.cc,v 1.2 2005/10/25 13:48:44 namapane Exp $
    \date 29 Jun 2005
 
    \note This test is not exaustive     
 */
-
-static const char CVSId[] = "$Id: testDTDigis.cc,v 1.1 2005/10/07 17:40:53 namapane Exp $";
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <DataFormats/DTDigi/interface/DTDigi.h>
@@ -64,19 +62,26 @@ void testDTDigis::testDigiCollectionPut(){
   }
 
   digiCollection.put(std::make_pair(digivec.begin(), digivec.end()),layer);
-    
+  
+  // Loop over the DetUnits with digis
   DTDigiCollection::DigiRangeIterator detUnitIt;
   for (detUnitIt=digiCollection.begin();
        detUnitIt!=digiCollection.end();
        ++detUnitIt){
+    
+    const DTDetId& id = (*detUnitIt).first;
+    const DTDigiCollection::Range& range = (*detUnitIt).second;
+ 
+//     // We have inserted digis for only one DetUnit...
+    CPPUNIT_ASSERT( id==layer );
 
+    // Loop over the digis of this DetUnit
     int i=0;
     for (DTDigiCollection::const_iterator digiIt = 
-	  detUnitIt->second.first;
-	  digiIt!=detUnitIt->second.second;
+	   range.first; digiIt!=range.second;
+// 	   detUnitIt->second.first;
+// 	 digiIt!=detUnitIt->second.second;
 	 ++digiIt){
-
-      
 
       CPPUNIT_ASSERT((*digiIt).wire()==1+i);
       CPPUNIT_ASSERT((*digiIt).countsTDC()==5+i);
@@ -103,20 +108,23 @@ void testDTDigis::testDigiCollectionInsert(){
 
   digiCollection.insertDigi(layer,digi);
 
-  //  DTDigiCollection::DetUnitIds layers = digiCollection.layers();
-
-//   for (DTDigiCollection::DetUnitIds::const_iterator layerIt = layers.begin();
-//        layerIt!= layers.end(); ++layerIt){
-
+  
+  // Loop over the DetUnits with digis
   DTDigiCollection::DigiRangeIterator detUnitIt;
   for (detUnitIt=digiCollection.begin();
        detUnitIt!=digiCollection.end();
        ++detUnitIt){
 
-    for (DTDigiCollection::const_iterator digiIt =
-          detUnitIt->second.first;
-          digiIt!=detUnitIt->second.second;
-         ++digiIt){
+    const DTDetId& id = (*detUnitIt).first;
+    const DTDigiCollection::Range& range = (*detUnitIt).second;
+
+    // We have inserted digis for only one DetUnit...
+    CPPUNIT_ASSERT(id==layer);
+
+    // Loop over the digis of this DetUnit
+    for (DTDigiCollection::const_iterator digiIt = range.first;
+	  digiIt!=range.second;
+	 ++digiIt){
 
 
       CPPUNIT_ASSERT((*digiIt).wire()==1);

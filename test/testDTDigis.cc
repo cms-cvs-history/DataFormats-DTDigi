@@ -3,7 +3,7 @@
    Test suit for DTDigis
 
    \author Stefano ARGIRO
-   \version $Id: testDTDigis.cc,v 1.2 2005/10/25 13:48:44 namapane Exp $
+   \version $Id: testDTDigis.cc,v 1.3 2005/11/01 17:19:23 namapane Exp $
    \date 29 Jun 2005
 
    \note This test is not exaustive     
@@ -22,6 +22,7 @@ class testDTDigis: public CppUnit::TestFixture {
   CPPUNIT_TEST(testDigiPacking);
   CPPUNIT_TEST(testDigiCollectionInsert);
   CPPUNIT_TEST(testDigiCollectionPut);
+  CPPUNIT_TEST(testTime2TDCConversion);
 
   CPPUNIT_TEST_SUITE_END();
 
@@ -33,6 +34,7 @@ public:
   void testDigiPacking();
   void testDigiCollectionInsert();
   void testDigiCollectionPut();
+  void testTime2TDCConversion();
 }; 
 
 ///registration of the test so that the runner can find it
@@ -134,5 +136,18 @@ void testDTDigis::testDigiCollectionInsert(){
 
     }// for digis in layer
    }// for layers
+
+}
+
+
+void testDTDigis::testTime2TDCConversion(){
+  float time=243;
+  float reso=25./32.;
+  int tdc=static_cast<int>(time/reso);
+  int pos=2;
+  int wire=1;
+
+  DTDigi digi(wire,time,pos);
+  CPPUNIT_ASSERT(digi.countsTDC()==tdc);
 
 }

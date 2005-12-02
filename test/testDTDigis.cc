@@ -3,7 +3,7 @@
    Test suit for DTDigis
 
    \author Stefano ARGIRO
-   \version $Id: testDTDigis.cc,v 1.3 2005/11/01 17:19:23 namapane Exp $
+   \version $Id: testDTDigis.cc,v 1.4 2005/11/10 13:21:02 bellan Exp $
    \date 29 Jun 2005
 
    \note This test is not exaustive     
@@ -110,7 +110,8 @@ void testDTDigis::testDigiCollectionInsert(){
 
   digiCollection.insertDigi(layer,digi);
 
-  
+  unsigned int count =0;
+
   // Loop over the DetUnits with digis
   DTDigiCollection::DigiRangeIterator detUnitIt;
   for (detUnitIt=digiCollection.begin();
@@ -123,27 +124,29 @@ void testDTDigis::testDigiCollectionInsert(){
     // We have inserted digis for only one DetUnit...
     CPPUNIT_ASSERT(id==layer);
 
+
     // Loop over the digis of this DetUnit
     for (DTDigiCollection::const_iterator digiIt = range.first;
 	  digiIt!=range.second;
 	 ++digiIt){
 
-
+      //std::cout << (*digiIt) << std::endl;
       CPPUNIT_ASSERT((*digiIt).wire()==1);
       CPPUNIT_ASSERT((*digiIt).number()==4);
       CPPUNIT_ASSERT((*digiIt).countsTDC()==5);
 
-
+      count++;
     }// for digis in layer
    }// for layers
 
+  CPPUNIT_ASSERT(count !=0);
 }
 
 
 void testDTDigis::testTime2TDCConversion(){
   float time=243;
   float reso=25./32.;
-  int tdc=static_cast<int>(time/reso);
+  int tdc=int(time/reso);
   int pos=2;
   int wire=1;
 

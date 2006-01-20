@@ -3,7 +3,7 @@
    Test suit for DTDigis
 
    \author Stefano ARGIRO
-   \version $Id: testDTDigis.cc,v 1.4 2005/11/10 13:21:02 bellan Exp $
+   \version $Id: testDTDigis.cc,v 1.5 2005/12/02 09:28:00 argiro Exp $
    \date 29 Jun 2005
 
    \note This test is not exaustive     
@@ -12,7 +12,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <DataFormats/DTDigi/interface/DTDigi.h>
 #include <DataFormats/DTDigi/interface/DTDigiCollection.h>
-#include <DataFormats/MuonDetId/interface/DTDetId.h>
+#include <DataFormats/MuonDetId/interface/DTLayerId.h>
 
 
 class testDTDigis: public CppUnit::TestFixture {
@@ -49,7 +49,7 @@ void testDTDigis::testDigiPacking(){
 
 void testDTDigis::testDigiCollectionPut(){
 
-  DTDetId layer(2,3,8,1,4);
+  DTLayerId layer(2,3,8,1,4);
 
   DTDigiCollection digiCollection;
 
@@ -71,7 +71,7 @@ void testDTDigis::testDigiCollectionPut(){
        detUnitIt!=digiCollection.end();
        ++detUnitIt){
     
-    const DTDetId& id = (*detUnitIt).first;
+    const DTLayerId& id = (*detUnitIt).first;
     const DTDigiCollection::Range& range = (*detUnitIt).second;
  
 //     // We have inserted digis for only one DetUnit...
@@ -104,7 +104,7 @@ void testDTDigis::testDigiCollectionInsert(){
   DTDigi digi(pd);
 
 
-  DTDetId layer(2,3,8,1,4);
+  DTLayerId layer(2,3,8,1,4);
 
   DTDigiCollection digiCollection;
 
@@ -118,7 +118,7 @@ void testDTDigis::testDigiCollectionInsert(){
        detUnitIt!=digiCollection.end();
        ++detUnitIt){
 
-    const DTDetId& id = (*detUnitIt).first;
+    const DTLayerId& id = (*detUnitIt).first;
     const DTDigiCollection::Range& range = (*detUnitIt).second;
 
     // We have inserted digis for only one DetUnit...

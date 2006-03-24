@@ -3,7 +3,7 @@
 <use name=DataFormats/DetId>
 <use name=boost>
 
-<bin name=testDTDigis file=testRunner.cpp,testDTDigis.cc>
+<bin name=testDTDigis file=testDTDigis.cpp>
   <use name=cppunit>
   <use name=DataFormats/FEDRawData>
 </bin>
